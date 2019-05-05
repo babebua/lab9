@@ -3,6 +3,7 @@
         "common_threads.h": "c",
         "unistd.h": "c",
         "stdio.h": "c",
-        "semaphore.h": "c"
+        "semaphore.h": "c",
+        "stdlib.h": "c"
     }
 }
