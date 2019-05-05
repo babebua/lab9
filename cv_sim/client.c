@@ -16,12 +16,12 @@ void *producer(void *arg) {
         Pthread_mutex_lock(&(shared_data->mutex));
 
         while (shared_data->rear - shared_data->front >= shared_data->number)
-            Pthread_condition_wait(&(shared_data->condition),
+            Pthread_cond_wait(&(shared_data->condition),
                                    &(shared_data->mutex));
 
         sbuf_insert(shared_data, item_number, msg);
         item_number++;
-        Pthread_condition_signal(&(shared_data->condition));
+        Pthread_cond_signal(&(shared_data->condition));
 
         Pthread_mutex_unlock(&(shared_data->mutex));
     }
@@ -35,11 +35,11 @@ void *consumer(void *arg) {
         Pthread_mutex_lock(&(shared_data->mutex));
 
         while (shared_data->rear - shared_data->front <= 0)
-            Pthread_condition_wait(&(shared_data->condition),
+            Pthread_cond_wait(&(shared_data->condition),
                                    &(shared_data->mutex));
 
         sbuf_remove(shared_data, msg);
-        Pthread_condition_signal(&(shared_data->condition));
+        Pthread_cond_signal(&(shared_data->condition));
 
         Pthread_mutex_unlock(&(shared_data->mutex));
     }
