@@ -8,15 +8,15 @@
 
 /* $begin sbuft */
 typedef struct {
-    int *buf;  /* Buffer array */
-    int *id;   /* Thread number array */
-    int n;     /* Maximum number of slots */
-    int front; /* buf[(front+1)%n] is first item */
-    int rear;  /* buf[rear%n] is last item */
-    // int cnt;
-    pthread_mutex_t mutex; /* Protects accesses to buf */
-    pthread_cond_t cond;
+    int *buffer;
+    int *id;
+    int number;
+    int front;
+    int rear;
+    pthread_mutex_t mutex;
+    pthread_cond_t condition;
 } sbuf_t;
+/* $end sbuft */
 
 void sbuf_init(sbuf_t *sp, int n);
 void sbuf_deinit(sbuf_t *sp);
